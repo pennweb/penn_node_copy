@@ -1,0 +1,5 @@
+*.json
+*.json.assets/
+*.log
+.DS_Store
+/vendor/

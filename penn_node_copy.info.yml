@@ -1,0 +1,11 @@
+name: 'Penn Node Copy'
+type: module
+description: 'Drush commands for copying nodes, embedded Penn Entities, media, and files between Penn Drupal sites.'
+package: Penn
+core_version_requirement: ^11
+dependencies:
+  - drupal:file
+  - drupal:media
+  - drupal:node
+  - drupal:path
+  - penn_entity:penn_entity

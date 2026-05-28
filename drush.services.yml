@@ -1,0 +1,5 @@
+services:
+  penn_node_copy.commands:
+    class: \Drupal\penn_node_copy\Commands\PennNodeCopyCommands
+    tags:
+      - { name: drush.command }
