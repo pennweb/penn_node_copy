@@ -53,6 +53,9 @@ cd ~/Desktop/penn-upstream-source
 lando drush penn-node-copy:export /app/private/penn-node-copy.json --bundle=page,penn_update
 ```
 
+> [!TIP]
+> Recommended: start with a single node or a short comma-separated node list. This makes the export smaller, easier to inspect, and safer to dry-run before syncing a full bundle.
+
 Export one node or a comma-separated list:
 
 ```bash
