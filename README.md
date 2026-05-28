@@ -3,7 +3,7 @@
 Custom Drush commands for copying Drupal nodes from one Penn upstream site to another.
 
 > [!WARNING]
-> Local-only tool: do not commit or push this module, generated export JSON files, or `.assets` directories to the source or destination Drupal site repositories. Install and run it only in local Lando copies. Changes to this tool should be committed only in this standalone `penn_node_copy` repository.
+> Local-only workflow: install this module only in temporary local Lando copies of the source and destination sites. Do not commit or push the copied module, generated export JSON files, or `.assets` directories to either Drupal site repository. Code changes for the tool itself belong only in this standalone `penn_node_copy` repository.
 
 The exporter walks node formatted-text fields for `<drupal-entity>` embeds, follows nested `penn_entity` references, collects media dependencies, and stores managed file bytes in the export JSON. The importer recreates files first, then media, Penn Entities, and nodes.
 
