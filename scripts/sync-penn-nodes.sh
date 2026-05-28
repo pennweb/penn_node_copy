@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SOURCE="${SOURCE:-$HOME/Desktop/penn-upstream-source}"
-DESTINATION="${DESTINATION:-$HOME/Desktop/penn-upstream-destination}"
+SOURCE_DIR="${SOURCE_DIR:-${SOURCE:-$HOME/Desktop/source}}"
+DESTINATION_DIR="${DESTINATION_DIR:-${DESTINATION:-$HOME/Desktop/destination}}"
 EXPORT_NAME="${EXPORT_NAME:-penn-node-copy.json}"
-SOURCE_EXPORT="$SOURCE/private/$EXPORT_NAME"
-DESTINATION_EXPORT="$DESTINATION/private/$EXPORT_NAME"
+SOURCE_EXPORT="$SOURCE_DIR/private/$EXPORT_NAME"
+DESTINATION_EXPORT="$DESTINATION_DIR/private/$EXPORT_NAME"
 CONTAINER_EXPORT="/app/private/$EXPORT_NAME"
 SOURCE_ASSETS="$SOURCE_EXPORT.assets"
 DESTINATION_ASSETS="$DESTINATION_EXPORT.assets"
@@ -19,7 +19,7 @@ if [[ $# -gt 0 && -z "$NODES" ]]; then
   NODES="$1"
 fi
 
-mkdir -p "$SOURCE/private" "$DESTINATION/private"
+mkdir -p "$SOURCE_DIR/private" "$DESTINATION_DIR/private"
 
 export_args=("$CONTAINER_EXPORT")
 if [[ -n "$NODES" ]]; then
@@ -37,7 +37,7 @@ if [[ "$DRY_RUN" == "1" ]]; then
   import_args+=("--dry-run")
 fi
 
-cd "$SOURCE"
+cd "$SOURCE_DIR"
 lando drush penn-node-copy:export "${export_args[@]}"
 
 if [[ ! -f "$SOURCE_EXPORT" ]]; then
@@ -54,5 +54,5 @@ if [[ -d "$SOURCE_ASSETS" ]]; then
   cp -R "$SOURCE_ASSETS" "$DESTINATION_ASSETS"
 fi
 
-cd "$DESTINATION"
+cd "$DESTINATION_DIR"
 lando drush penn-node-copy:import "${import_args[@]}"
