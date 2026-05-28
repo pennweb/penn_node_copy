@@ -1,22 +1,22 @@
 # Penn Node Copy
 
-Custom Drush commands for copying Drupal nodes from one Penn upstream site to another.
+Custom Drush commands for one-way Drupal content copy/sync from a source Penn upstream site to a destination site.
 
 > [!WARNING]
 > Local-only workflow: install this module only in temporary local Lando copies of the source and destination sites. Do not commit or push the copied module, generated export JSON files, or `.assets` directories to either Drupal site repository. Code changes for the tool itself belong only in this standalone `penn_node_copy` repository.
 
-The exporter walks node formatted-text fields for `<drupal-entity>` embeds, follows nested `penn_entity` references, collects media dependencies, and stores managed file bytes in the export JSON. The importer recreates files first, then media, Penn Entities, and nodes.
+The exporter walks node formatted-text fields for `<drupal-entity>` embeds, follows nested `penn_entity` references, collects media dependencies, and stores managed file bytes in the export JSON. The importer creates missing destination entities and updates matching destination entities by Drupal UUID. It imports files first, then media, Penn Entities, and nodes.
 
 ## Recommended Workflow
 
-Use two local Lando projects when testing or running a content copy:
+Use two local Lando projects when testing or running a one-way content copy/sync:
 
 - `penn-upstream-source`: a local copy of the environment you want to copy content from.
 - `penn-upstream-destination`: a local copy of the environment you want to update.
 
-In most cases these projects should represent the same Drupal site at two different environments, such as Live and Staging. Refresh each local project with the matching environment database before running the copy commands. That keeps the test close to the real source and destination state, and makes it easier to regression-test the specific `penn-node-copy` command you plan to run.
+In most cases these projects should represent the same Drupal site at two different environments, such as Live and Staging. Refresh each local project with the matching environment database before running the copy/sync commands. That keeps the test close to the real source and destination state, and makes it easier to regression-test the specific `penn-node-copy` command you plan to run.
 
-The tool matches content by Drupal UUID, not by numeric node ID. That is why both local databases should come from related environments of the same site whenever possible.
+This is not a two-way sync. Content moves from source to destination only. The tool matches content by Drupal UUID, not by numeric node ID, which is why both local databases should come from related environments of the same site whenever possible.
 
 ## Install
 
@@ -41,7 +41,7 @@ cd ~/Desktop/penn-upstream-source && lando drush en penn_node_copy -y
 cd ~/Desktop/penn-upstream-destination && lando drush en penn_node_copy -y
 ```
 
-## Copy Content
+## Copy/Sync Content
 
 Export from source:
 
