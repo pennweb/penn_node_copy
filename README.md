@@ -4,6 +4,17 @@ Custom Drush commands for copying Drupal nodes from one Penn upstream site to an
 
 The exporter walks node formatted-text fields for `<drupal-entity>` embeds, follows nested `penn_entity` references, collects media dependencies, and stores managed file bytes in the export JSON. The importer recreates files first, then media, Penn Entities, and nodes.
 
+## Recommended Workflow
+
+Use two local Lando projects when testing or running a content copy:
+
+- `penn-upstream-source`: a local copy of the environment you want to copy content from.
+- `penn-upstream-destination`: a local copy of the environment you want to update.
+
+In most cases these projects should represent the same Drupal site at two different environments, such as Live and Staging. Refresh each local project with the matching environment database before running the copy commands. That keeps the test close to the real source and destination state, and makes it easier to regression-test the specific `penn-node-copy` command you plan to run.
+
+The tool matches content by Drupal UUID, not by numeric node ID. That is why both local databases should come from related environments of the same site whenever possible.
+
 ## Install
 
 Clone the module repository:
