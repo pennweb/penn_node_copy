@@ -6,11 +6,18 @@ The exporter walks node formatted-text fields for `<drupal-entity>` embeds, foll
 
 ## Install
 
-Copy this directory to both sites:
+Clone the module repository:
 
 ```bash
-cp -R penn_node_copy ~/Desktop/penn-upstream-source/web/modules/custom/
-cp -R penn_node_copy ~/Desktop/penn-upstream-destination/web/modules/custom/
+cd ~/Desktop
+git clone git@github.com:pennweb/penn_node_copy.git
+```
+
+Copy the cloned module to both Drupal sites:
+
+```bash
+cp -R ~/Desktop/penn_node_copy ~/Desktop/penn-upstream-source/web/modules/custom/
+cp -R ~/Desktop/penn_node_copy ~/Desktop/penn-upstream-destination/web/modules/custom/
 ```
 
 Enable it in both Lando apps:
