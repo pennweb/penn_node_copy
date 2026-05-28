@@ -31,6 +31,9 @@ cd ~/Desktop/penn-upstream-destination && lando drush en penn_node_copy -y
 
 Export from source:
 
+> [!CAUTION]
+> Danger Zone: exporting a broad bundle such as `page,penn_update` can create a large transfer package and the later import will update matching destination content by UUID. Start with one node or a short node list, run the destination import with `--dry-run`, and confirm the reported changes before running the real import.
+
 ```bash
 cd ~/Desktop/penn-upstream-source
 lando drush penn-node-copy:export /app/private/penn-node-copy.json --bundle=page,penn_update
