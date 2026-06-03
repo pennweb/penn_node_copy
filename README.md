@@ -7,6 +7,11 @@ Custom Drush commands for one-way Drupal content copy/sync from a source Penn up
 
 The exporter walks node formatted-text fields for `<drupal-entity>` embeds, follows nested `penn_entity` references, collects media dependencies, and stores managed file bytes in the export JSON. The importer creates missing destination entities and updates matching destination entities by Drupal UUID. It imports files first, then media, Penn Entities, and nodes.
 
+## Documentation
+
+- [Product Brief](docs/PRODUCT_BRIEF.md)
+- [Architecture](docs/ARCHITECTURE.md)
+
 ## Recommended Workflow
 
 Use two local Lando projects when testing or running a one-way content copy/sync:
